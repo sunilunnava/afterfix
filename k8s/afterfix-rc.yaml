@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: afterfix
+  namespace: com-att-ocnp-mgmt
+spec:
+  replicas: 1
+  selector:
+    app: afterfix
+  template:
+    metadata:
+      labels:
+        app: afterfix
+    spec:
+      serviceAccount: YOUR
+      containers:
+      - name: afterfix
+        image: ${docker-registry}/${docker-namespace}/afterfix:latest
+        imagePullPolicy: Always
+        ports:
+         - containerPort: 8080
